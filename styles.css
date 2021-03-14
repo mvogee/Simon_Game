@@ -1,0 +1,35 @@
+body {
+    text-align: center;
+    background-color: #011F3F;
+}
+
+h1 {
+    font-family: 'Press start 2p', Arial, Helvetica, sans-serif;
+    color: #FEF2BF;
+    margin: 2em;
+}
+
+div[type="button"] {
+    border: 10px solid;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin: .5em;
+}
+
+.redbtn {
+    background-color: red;
+}
+
+.bluebtn {
+    background-color: blue;
+}
+
+.yellowbtn {
+    background-color: yellow;
+}
+
+.greenbtn {
+    background-color: green;
+}
