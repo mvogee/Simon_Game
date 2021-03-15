@@ -95,11 +95,3 @@ function playsounds(soundToPlay) {
     audio.play();
 
 }
-
-//onlcick 
-// check if correct box was clicked on
-// if correct box was clicked incriment i and continue with below directions
-// if incorrect display lose screen and reset array and reset level to 0 reset playing to false
-// check if it is the end of the sequence
-// if it is the end of the array (i === order.length),
-// reset i to 0 and call startLevel
