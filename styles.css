@@ -9,9 +9,9 @@ h1 {
     margin: 2em;
 }
 
-div[type="button"] {
+.btn {
     border: 10px solid;
-    border-radius: 10px;
+    border-radius: 40px;
     width: 200px;
     height: 200px;
     display: inline-block;
@@ -32,4 +32,19 @@ div[type="button"] {
 
 .greenbtn {
     background-color: green;
+}
+
+.btn:active {
+    border-color: grey;
+    box-shadow: 0 0 20px white;
+}
+
+.btnhighlight {
+    /* border-color: rgb(80, 80, 80); */
+    box-shadow: 0 0 10px white;
+}
+
+.wrong {
+    background-color: red;
+    opacity: 0.8;
 }

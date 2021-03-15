@@ -1,19 +1,105 @@
-$(document).on("keypress", main);
+var level = 0;
+var order = [];
+var playing = false;
+var i = 0;
 
-
-
+$(document).on("keypress", startGame);
+$('.btn').on('click', function(){ btnclicked(this); });
 
 function getRandomBox() {
-    return Math.floor(Math.random() * 4); 
+    var num = Math.floor(Math.random() * 4);
+    var btn = "";
+    switch (num) {
+        case 0:
+            btn = "yellowbtn";
+            break;
+        case 1:
+            btn = "bluebtn";
+            break;
+        case 2:
+            btn = "greenbtn";
+            break;
+        case 3:
+            btn = "redbtn";
+            break;
+        default:
+            btn = "error";
+            break;
+    }
+    return btn;
 }
 
 
-function main() {
-    var level = 1;
+function gameOverScreen() {
+    $("body").toggleClass("wrong");
+    setTimeout(function (){ $("body").toggleClass("wrong");}, 1000);
+}
+
+function resetGame() {
+    playing = false;
+    order = [];
+    level = 0;
+    i = 0;
+    $('h1').text("Press any key to begin");
+};
+
+function isCorrectOrder(btn) {
+    var correctbtn = order[i];
+    return (btn === correctbtn ? true : false);
+}
+
+function displayBox(box) {
+    $("." + box).toggleClass("btnhighlight");
+    setTimeout(function() {$("." + box).toggleClass("btnhighlight");} , 1000);
+}
+
+function btnclicked(btn) {
+    if (playing) {
+        if (isCorrectOrder(btn.classList[1])) {
+            playsounds(btn.classList[1]);
+            i++;
+            if (i === order.length) {
+                startLevel();
+            }
+        }
+        else {
+            playsounds("wrong");
+            gameOverScreen();
+            resetGame();
+        }
+    }
+    
+}
+
+function startGame() {
+    if (playing === true) {
+        return ;
+    }
+    else {
+        playing = true;
+        startLevel();
+    }
+}
+
+function startLevel() {
+    i = 0;
+    level++;
     $('h1').text("level " + level);
-    var order = [];
-    // get random number between 0 and 3 that will represent your boxes 1-blue 2-yellow 3-green 4-red
-    // add that number to the array
-    // when there is a click if it is not on the correct button end the game
-    $('.btn').on('click', function(){console.log(this)} ); // why does this only give me one element?
+    var randbox = getRandomBox();
+    displayBox(randbox); // create this function
+    order.push(randbox);
 }
+
+function playsounds(soundToPlay) {
+    var audio = new Audio("./sounds/" + soundToPlay + ".mp3");
+    audio.play();
+
+}
+
+//onlcick 
+// check if correct box was clicked on
+// if correct box was clicked incriment i and continue with below directions
+// if incorrect display lose screen and reset array and reset level to 0 reset playing to false
+// check if it is the end of the sequence
+// if it is the end of the array (i === order.length),
+// reset i to 0 and call startLevel
