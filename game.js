@@ -8,29 +8,12 @@ $('.btn').on('click', function(){ btnclicked(this); });
 
 function getRandomBox() {
     var num = Math.floor(Math.random() * 4);
-    var btn = "";
-    switch (num) {
-        case 0:
-            btn = "yellowbtn";
-            break;
-        case 1:
-            btn = "bluebtn";
-            break;
-        case 2:
-            btn = "greenbtn";
-            break;
-        case 3:
-            btn = "redbtn";
-            break;
-        default:
-            btn = "error";
-            break;
-    }
-    return btn;
+    var btns = ["yellowbtn", "bluebtn", "greenbtn", "redbtn"];
+    return btns[num];
 }
 
-
 function gameOverScreen() {
+    $("h1").text("Game Over!");
     $("body").toggleClass("wrong");
     setTimeout(function (){ $("body").toggleClass("wrong");}, 1000);
 }
@@ -49,8 +32,7 @@ function isCorrectOrder(btn) {
 }
 
 function displayBox(box) {
-    $("." + box).toggleClass("btnhighlight");
-    setTimeout(function() {$("." + box).toggleClass("btnhighlight");} , 1000);
+    $("." + box).fadeOut(350).fadeIn(350);
 }
 
 function btnclicked(btn) {
@@ -84,10 +66,14 @@ function startGame() {
 function startLevel() {
     i = 0;
     level++;
-    $('h1').text("level " + level);
     var randbox = getRandomBox();
-    displayBox(randbox); // create this function
     order.push(randbox);
+    setTimeout(function() {
+        $('h1').text("level " + level);
+        displayBox(randbox);
+        playsounds(randbox);
+    }, 500);
+    
 }
 
 function playsounds(soundToPlay) {
