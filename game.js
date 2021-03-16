@@ -4,7 +4,7 @@ var playing = false;
 var i = 0;
 
 $(document).on("keypress", startGame);
-$('.btn').on('click', function(){ btnclicked(this); });
+
 
 function getRandomBox() {
     var num = Math.floor(Math.random() * 4);
@@ -24,6 +24,7 @@ function resetGame() {
     level = 0;
     i = 0;
     $('h1').text("Press any key to begin");
+    $('.btn').off('click');
 };
 
 function isCorrectOrder(btn) {
@@ -36,6 +37,7 @@ function displayBox(box) {
 }
 
 function btnclicked(btn) {
+    console.log("hi");
     if (playing) {
         if (isCorrectOrder(btn.classList[1])) {
             playsounds(btn.classList[1]);
@@ -58,6 +60,7 @@ function startGame() {
         return ;
     }
     else {
+        $('.btn').on('click', function(){ btnclicked(this); });
         playing = true;
         startLevel();
     }
