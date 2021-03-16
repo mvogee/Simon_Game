@@ -35,7 +35,7 @@ h1 {
 }
 
 .btn:active {
-    border-color: grey;
+    background-color: grey;
     box-shadow: 0 0 20px white;
 }
 
